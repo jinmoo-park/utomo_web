@@ -28,12 +28,6 @@ const MultipleSelect = ({
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (containerRef?.current) {
-            containerRef.current.scrollBy({
-                left: containerRef.current?.scrollWidth,
-                behavior: 'smooth',
-            });
-        }
         onChange?.(selected);
     }, [selected]);
 
@@ -51,9 +45,9 @@ const MultipleSelect = ({
                 <motion.div
                     layout
                     ref={containerRef}
-                    className='selected no-scrollbar flex h-16 w-full items-center overflow-x-scroll scroll-smooth rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm'
+                    className='selected no-scrollbar flex min-h-[80px] w-full items-start flex-wrap gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm'
                 >
-                    <motion.div layout className='flex items-center gap-2'>
+                    <motion.div layout className='flex items-center flex-wrap gap-2'>
                         {selected?.map((item) => (
                             <motion.div
                                 layout
@@ -125,6 +119,9 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
         { key: 'asana', name: 'Asana' },
         { key: 'jira', name: 'Jira' },
         { key: 'teams', name: 'Microsoft Teams' },
+        { key: 'google-workspace', name: 'Google Workspace' },
+        { key: 'monday', name: 'Monday' },
+        { key: 'etc', name: 'etc.' },
     ];
 
     useEffect(() => {

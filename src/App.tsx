@@ -36,6 +36,29 @@ function App() {
         return () => observer.disconnect();
     }, []);
 
+    // Premium Card Mouse Glow Effect
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const cards = document.querySelectorAll('.premium-card');
+            cards.forEach((card) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const glow = card.querySelector('.mouse-glow') as HTMLElement;
+                if (glow) {
+                    glow.style.left = `${x}px`;
+                    glow.style.top = `${y}px`;
+                }
+            });
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, []);
+
     const employees = parseInt(calcData.employees) || 0;
     const hoursPerWeek = parseInt(calcData.hoursPerWeek) || 0;
     const hourlyWage = parseInt(calcData.hourlyWage) || 0;
@@ -44,9 +67,28 @@ function App() {
     const monthlyCostSaved = monthlyHoursSaved * hourlyWage;
     const yearlyCostSaved = monthlyCostSaved * 12;
 
-    const handleFormSubmit = (data: any) => {
-        console.log('Workflow diagnosis request submitted:', data);
-        alert('진단 신청이 완료되었습니다. 24시간 이내에 연락드리겠습니다.');
+    const handleFormSubmit = async (data: any) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('진단 신청이 완료되었습니다. 24시간 이내에 연락드리겠습니다.');
+            } else {
+                alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');
+                console.error('Error:', result);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        }
     };
 
     const getDynamicFontSize = (text: string, baseSize: number = 3) => {
@@ -123,6 +165,7 @@ function App() {
                         </div>
                         <div className="calc-grid">
                             <div className="premium-card">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="calc-inputs">
                                         <div className="calc-input-group">
@@ -171,6 +214,7 @@ function App() {
                                 </div>
                             </div>
                             <div className="premium-card">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="calc-results">
                                         <div className="result-card" style={{ overflow: 'hidden' }}>
@@ -219,6 +263,7 @@ function App() {
                         <h2 className="section-title text-center reveal">왜 비싼 AI 툴을 도입하고도 실패할까요?</h2>
                         <div className="pain-grid">
                             <div className="premium-card pain-card reveal delay-1">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <LogIn className="pain-icon" size={48} />
                                     <h3>새로운 로그인</h3>
@@ -226,6 +271,7 @@ function App() {
                                 </div>
                             </div>
                             <div className="premium-card pain-card reveal delay-2">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <BookOpen className="pain-icon" size={48} />
                                     <h3>학습 곡선</h3>
@@ -233,6 +279,7 @@ function App() {
                                 </div>
                             </div>
                             <div className="premium-card pain-card reveal delay-3">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <ZapOff className="pain-icon" size={48} />
                                     <h3>단절된 워크플로우</h3>
@@ -254,6 +301,7 @@ function App() {
                         </div>
                         <div className="solutions-grid">
                             <div className="premium-card solution-card reveal delay-1">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="solution-icon">💬</div>
                                     <h3>Slack / Teams 연동</h3>
@@ -266,6 +314,7 @@ function App() {
                                 </div>
                             </div>
                             <div className="premium-card solution-card reveal delay-2">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="solution-icon">📊</div>
                                     <h3>데이터 자동화</h3>
@@ -278,6 +327,7 @@ function App() {
                                 </div>
                             </div>
                             <div className="premium-card solution-card reveal delay-3">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="solution-icon">⚙️</div>
                                     <h3>커스텀 워크플로우</h3>
@@ -304,6 +354,7 @@ function App() {
                             </div>
                             <div className="approach-visual">
                                 <div className="premium-card chat-mockup">
+                                    <div className="mouse-glow"></div>
                                     <div className="premium-card-inner">
                                         <div className="chat-bubble user">@utomo 어제 들어온 주문서 엑셀에 정리해줘</div>
                                         <div className="chat-bubble ai">네, 15건의 주문을 '240519_주문현황.xlsx'에 업데이트 완료했습니다.</div>
@@ -320,6 +371,7 @@ function App() {
                             </div>
                             <div className="approach-visual">
                                 <div className="premium-card prompt-mockup">
+                                    <div className="mouse-glow"></div>
                                     <div className="premium-card-inner">
                                         <div className="old-way">System: Act as a professional data analyst and...</div>
                                         <div className="new-way">"이번 달 매출 보고서 써줘"</div>
@@ -341,30 +393,34 @@ function App() {
                         </div>
                         <div className="process-steps">
                             <div className="premium-card process-step reveal delay-1">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="step-number">01</div>
-                                    <h3>업무 진단 (Diagnosis)</h3>
+                                    <h3>업무 진단</h3>
                                     <p>현재 업무 중 자동화가 가능한 영역을 식별하고 ROI를 분석합니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card process-step reveal delay-2">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="step-number">02</div>
-                                    <h3>솔루션 설계 (Design)</h3>
+                                    <h3>솔루션 설계</h3>
                                     <p>기존 툴과 연동되는 최적의 AI 워크플로우를 설계합니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card process-step reveal delay-3">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="step-number">03</div>
-                                    <h3>구축 및 통합 (Build)</h3>
+                                    <h3>구축 및 통합</h3>
                                     <p>AI 에이전트를 구축하고 실제 업무 환경에 통합합니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card process-step reveal delay-4">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <div className="step-number">04</div>
-                                    <h3>최적화 (Optimize)</h3>
+                                    <h3>최적화</h3>
                                     <p>실제 사용 데이터를 바탕으로 성능을 지속적으로 고도화합니다.</p>
                                 </div>
                             </div>
@@ -380,24 +436,28 @@ function App() {
                         </div>
                         <div className="faq-grid reveal delay-1">
                             <div className="premium-card faq-item">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <h3>Q. 보안은 안전한가요?</h3>
                                     <p>A. 모든 데이터는 엔터프라이즈급 보안 표준을 준수하며, 고객사의 승인 없이 외부로 유출되지 않습니다. 온프레미스 구축 옵션도 제공합니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card faq-item">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <h3>Q. 기존에 쓰던 툴을 바꿔야 하나요?</h3>
                                     <p>A. 아니요. <Utomo />의 철학은 'No New Tool'입니다. 현재 사용 중인 Slack, Notion, Excel 등을 그대로 사용하면서 AI 기능만 추가됩니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card faq-item">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <h3>Q. 도입 비용은 어떻게 되나요?</h3>
                                     <p>A. 자동화 범위와 복잡도에 따라 다릅니다. 무료 진단 신청을 통해 예상 ROI와 견적을 확인하실 수 있습니다.</p>
                                 </div>
                             </div>
                             <div className="premium-card faq-item">
+                                <div className="mouse-glow"></div>
                                 <div className="premium-card-inner">
                                     <h3>Q. 개발자가 없는 회사도 가능한가요?</h3>
                                     <p>A. 네, 가능합니다. <Utomo />가 설계부터 구축, 유지보수까지 모든 과정을 전담하여 관리해 드립니다.</p>
