@@ -262,6 +262,7 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 2rem;
+    margin-top: 100px;
 }
 
 .hero-title {
@@ -789,6 +790,10 @@
     .menu-toggle {
         display: block;
         margin-left: auto;
+    }
+
+    .hero-content-overlay {
+        margin-top: 80px;
     }
 
     .hero-title {
