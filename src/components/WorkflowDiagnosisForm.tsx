@@ -115,12 +115,14 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
         { key: 'notion', name: 'Notion' },
         { key: 'excel', name: 'Excel' },
         { key: 'email', name: 'Email' },
-        { key: 'trello', name: 'Trello' },
         { key: 'asana', name: 'Asana' },
         { key: 'jira', name: 'Jira' },
         { key: 'teams', name: 'Microsoft Teams' },
         { key: 'google-workspace', name: 'Google Workspace' },
         { key: 'monday', name: 'Monday' },
+        { key: 'figma', name: 'Figma' },
+        { key: 'kakaotalk', name: 'Kakaotalk' },
+        { key: 'telegram', name: 'Telegram' },
         { key: 'etc', name: 'etc.' },
     ];
 
@@ -157,6 +159,13 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // 최소 하나의 도구가 선택되었는지 확인
+        if (!formData.tools || formData.tools.length === 0) {
+            alert('최소 하나 이상의 업무 도구를 선택해주세요.');
+            return;
+        }
+        
         onSubmit?.(formData);
         console.log('Form submitted:', formData);
     };
