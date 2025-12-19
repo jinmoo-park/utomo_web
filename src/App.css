@@ -145,6 +145,7 @@
     justify-content: center;
     overflow: hidden;
     background: var(--bg-dark);
+    padding-top: 100px;
 }
 
 .hero-background {
@@ -262,7 +263,6 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 2rem;
-    margin-top: 100px;
 }
 
 .hero-title {
@@ -792,8 +792,8 @@
         margin-left: auto;
     }
 
-    .hero-content-overlay {
-        margin-top: 80px;
+    .hero {
+        padding-top: 80px;
     }
 
     .hero-title {
