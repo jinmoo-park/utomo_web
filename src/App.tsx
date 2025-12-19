@@ -91,8 +91,7 @@ function App() {
                 {/* Hero Section */}
                 <section className="hero">
                     <div className="hero-background">
-                        <img src="/premium_hero.png" alt="" className="hero-bg-img" />
-                        <div className="hero-grid"></div>
+                        <img src="/bg.png" alt="" className="hero-bg-img" />
                         <div className="hero-overlay"></div>
                         <div className="hero-glow"></div>
                         <div className="hero-glow-secondary"></div>
