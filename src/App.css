@@ -806,6 +806,13 @@
     .btn-primary {
         width: 100%;
         justify-content: center;
+        padding: 1.2rem 1.5rem;
+        font-size: 0.95rem;
+        border-radius: 12px;
+        min-height: 56px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .calc-grid {
