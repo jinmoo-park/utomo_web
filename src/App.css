@@ -122,15 +122,40 @@
 /* overflow만 visible로 변경하여 둥근 모서리가 제대로 보이도록 */
 .revenue-pipeline-card.premium-card {
     overflow: visible;
+    background: transparent !important;
+    /* 배경을 투명하게 - inner에서 배경 처리 */
 }
 
-/* Revenue Pipelines 카드에서는 ::after 요소 제거 (검정 박스 튀어나오는 문제 해결) */
+/* 아코디언 카드의 마우스 조명 효과 밝기 조정 (배경 투명으로 인해 너무 밝게 보임) */
+.revenue-pipeline-card.premium-card .mouse-glow {
+    background: radial-gradient(circle, rgba(223, 255, 0, 0.05) 0%, transparent 50%) !important;
+}
+
+/* 아코디언 카드의 ::after에 명시적 border-radius 설정 */
 .revenue-pipeline-card.premium-card::after {
-    display: none !important;
+    border-radius: 24px;
+}
+
+/* 아코디언 카드의 ::before blob 효과는 overflow 문제를 방지하기 위해 비활성화 */
+.revenue-pipeline-card.premium-card::before {
+    display: none;
 }
 
 /* 점 패턴 배경 */
 .premium-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, rgba(223, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+}
+
+/* 기본 blob 효과 (항상 보이는 은은한 효과) */
+.premium-card::before {
+    content: "";
     position: absolute;
     top: 30%;
     left: 20%;
@@ -142,7 +167,6 @@
     pointer-events: none;
     z-index: 1;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    border-radius: inherit;
 }
 
 /* 마우스 추적 효과를 위한 클래스 */
@@ -191,6 +215,11 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    background: transparent !important;
+    /* 배경 투명 - 콘텐츠 영역에서만 배경 처리 */
+    backdrop-filter: none !important;
+    /* blur 효과도 제거 */
+    border-radius: 22px;
 }
 
 /* Hero Section */
@@ -530,6 +559,16 @@
     padding: 0;
 }
 
+.pain-card.premium-card {
+    transition: var(--transition-base);
+}
+
+.pain-card.premium-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(223, 255, 0, 0.15);
+    transform: translateY(-5px);
+}
+
 .pain-icon-wrapper {
     width: 64px;
     height: 64px;
@@ -692,13 +731,11 @@
 .workflow-arrow.broken .arrow-line {
     width: 100%;
     height: 2px;
-    background: repeating-linear-gradient(
-        to right,
-        rgba(223, 255, 0, 0.3) 0px,
-        rgba(223, 255, 0, 0.3) 3px,
-        transparent 3px,
-        transparent 6px
-    );
+    background: repeating-linear-gradient(to right,
+            rgba(223, 255, 0, 0.3) 0px,
+            rgba(223, 255, 0, 0.3) 3px,
+            transparent 3px,
+            transparent 6px);
 }
 
 .workflow-arrow.broken .arrow-x {
@@ -763,7 +800,7 @@
     padding-bottom: 4rem;
 }
 
-section.revenue-pipelines-section > .container {
+section.revenue-pipelines-section>.container {
     max-width: 1400px !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -873,9 +910,10 @@ section.revenue-pipelines-section > .container {
 .pipeline-card-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                padding 0.5s ease;
+    /* 닫힐 때: 빠른 transition */
+    transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease,
+        padding 0.25s ease;
     opacity: 0;
     padding: 0 2rem;
     margin: 0;
@@ -896,6 +934,10 @@ section.revenue-pipelines-section > .container {
     position: relative;
     z-index: 0;
     background: inherit;
+    /* 열릴 때: 느린 transition */
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        padding 0.5s ease;
 }
 
 .pipeline-card-number {
@@ -1041,15 +1083,15 @@ section.revenue-pipelines-section > .container {
 
 /* Mobile Responsive */
 @media (max-width: 1024px) {
-    section.revenue-pipelines-section > .container {
+    section.revenue-pipelines-section>.container {
         padding-left: 2rem !important;
         padding-right: 2rem !important;
     }
-    
+
     .revenue-pipelines-list {
         max-width: 1000px !important;
     }
-    
+
     .revenue-pipeline-card {
         max-width: 1000px !important;
         width: 100% !important;
@@ -1062,67 +1104,67 @@ section.revenue-pipelines-section > .container {
         max-width: 1000px !important;
         width: 100% !important;
     }
-    
+
     .revenue-pipeline-card {
         max-width: 1000px !important;
         width: 100% !important;
     }
-    
+
     .pipeline-card-header {
         padding: 1.5rem;
         gap: 1rem;
     }
-    
+
     .pipeline-header-content {
         gap: 1rem;
     }
-    
+
     .pipeline-card-number {
         font-size: 2.5rem;
     }
-    
+
     .pipeline-card-title {
         font-size: 1.3rem;
     }
-    
+
     .pipeline-card-subtitle {
         font-size: 0.9rem;
     }
-    
+
     .pipeline-card-content.expanded {
         padding: 0 1.5rem 1.5rem 1.5rem;
     }
-    
+
     .pipeline-toggle-btn {
         padding: 0.4rem;
     }
-    
+
     .pipeline-step-label {
         font-size: 0.75rem;
         padding: 0.3rem 0.6rem;
     }
-    
+
     .pipeline-step-content {
         font-size: 0.9rem;
         padding: 0.8rem;
     }
-    
+
     .pipeline-pain-point {
         font-size: 0.9rem;
         padding: 1rem;
     }
-    
+
     .pipeline-impact {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
         padding: 0.8rem 1rem;
     }
-    
+
     .impact-label {
         font-size: 0.85rem;
     }
-    
+
     .impact-value {
         font-size: 0.95rem;
     }
@@ -1256,6 +1298,16 @@ section.revenue-pipelines-section > .container {
     color: currentColor;
 }
 
+.solution-card.premium-card {
+    transition: var(--transition-base);
+}
+
+.solution-card.premium-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(223, 255, 0, 0.15);
+    transform: translateY(-5px);
+}
+
 .solution-card:hover .solution-icon {
     background: linear-gradient(135deg, rgba(223, 255, 0, 0.2) 0%, rgba(223, 255, 0, 0.1) 100%);
     border-color: var(--primary);
@@ -1359,6 +1411,16 @@ section.revenue-pipelines-section > .container {
     line-height: 1.6;
     position: relative;
     z-index: 1;
+}
+
+.process-step.premium-card {
+    transition: var(--transition-base);
+}
+
+.process-step.premium-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(223, 255, 0, 0.15);
+    transform: translateY(-5px);
 }
 
 /* FAQ Section */
@@ -1569,73 +1631,73 @@ section.revenue-pipelines-section > .container {
         height: 56px;
         margin-bottom: 1.2rem;
     }
-    
+
     .pain-icon {
         width: 28px;
         height: 28px;
     }
-    
+
     .pain-card h3 {
         font-size: 1.4rem;
         margin-bottom: 1.2rem;
     }
-    
+
     .pain-card p {
         font-size: 0.95rem;
         margin-bottom: 1.2rem;
     }
-    
+
     .pain-visual {
         margin-bottom: 1.2rem;
         min-height: 70px;
     }
-    
+
     .pain-stat-number {
         font-size: 4rem;
     }
-    
+
     .chart-row {
         height: 22px;
         gap: 0.6rem;
     }
-    
+
     .chart-label {
         font-size: 0.8rem;
         min-width: 70px;
     }
-    
+
     .chart-progress {
         height: 18px;
         padding: 0 0.6rem;
     }
-    
+
     .workflow-box {
         padding: 0.8rem 1.2rem;
         font-size: 0.9rem;
         min-width: 60px;
     }
-    
+
     .workflow-arrow.broken .arrow-x {
         width: 20px;
         height: 20px;
     }
-    
+
     .workflow-arrow.broken .arrow-x svg {
         width: 20px;
         height: 20px;
     }
-    
+
     .pain-warning {
         padding: 0.6rem 0.8rem;
         margin-top: auto;
         gap: 0.5rem;
     }
-    
+
     .warning-icon-svg {
         width: 18px;
         height: 18px;
     }
-    
+
     .warning-text {
         font-size: 0.85rem;
     }

@@ -14,6 +14,7 @@ import {
 import { IconifyIcon } from '@/components/IconifyIcon';
 import { WorkflowDiagnosisForm } from '@/components/WorkflowDiagnosisForm';
 import { Logo } from '@/components/Logo';
+import FeatureSection from '@/components/FeatureSection';
 import './App.css';
 
 function App() {
@@ -351,63 +352,7 @@ function App() {
                 </section>
 
                 {/* Solutions Section */}
-                <section id="solutions" className="section">
-                    <div className="container">
-                        <div className="text-center reveal">
-                            <h2 className="section-title"><Utomo />가 해결하는 실질적인 문제들</h2>
-                            <p className="section-subtitle">
-                                단순한 챗봇이 아닙니다. 비즈니스 로직을 이해하고 실행하는 AI 에이전트입니다.
-                            </p>
-                        </div>
-                        <div className="solutions-grid">
-                            <div className="premium-card solution-card reveal delay-1">
-                                <div className="mouse-glow"></div>
-                                <div className="premium-card-inner">
-                                    <div className="solution-icon">
-                                        <IconifyIcon icon="solar:chat-round-linear" width="2.5rem" height="2.5rem" />
-                                    </div>
-                                    <h3>Slack / Teams 연동</h3>
-                                    <p>메신저에서 바로 보고서를 요청하거나, 고객 문의에 대한 초안을 작성하고, 팀원들에게 알림을 보냅니다.</p>
-                                    <ul className="solution-list">
-                                        <li>고객 상담 자동 요약</li>
-                                        <li>일일 업무 보고서 자동 생성</li>
-                                        <li>사내 지식 베이스 검색</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="premium-card solution-card reveal delay-2">
-                                <div className="mouse-glow"></div>
-                                <div className="premium-card-inner">
-                                    <div className="solution-icon">
-                                        <IconifyIcon icon="solar:code-file-linear" width="2.5rem" height="2.5rem" />
-                                    </div>
-                                    <h3>데이터 자동화</h3>
-                                    <p>데이터를 일일이 복사해서 붙여넣지 마세요. AI가 맥락을 파악하여 정확한 위치에 데이터를 기록합니다.</p>
-                                    <ul className="solution-list">
-                                        <li>주문서 데이터 자동 추출</li>
-                                        <li>재고 현황 실시간 업데이트</li>
-                                        <li>프로젝트 진행률 자동 트래킹</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="premium-card solution-card reveal delay-3">
-                                <div className="mouse-glow"></div>
-                                <div className="premium-card-inner">
-                                    <div className="solution-icon">
-                                        <IconifyIcon icon="solar:widget-5-linear" width="2.5rem" height="2.5rem" />
-                                    </div>
-                                    <h3>커스텀 워크플로우</h3>
-                                    <p>우리 회사만의 독특한 업무 프로세스도 문제없습니다. 기존 시스템과 완벽하게 결합됩니다.</p>
-                                    <ul className="solution-list">
-                                        <li>ERP/CRM 데이터 연동</li>
-                                        <li>이메일 기반 업무 자동화</li>
-                                        <li>복합 조건부 로직 실행</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <FeatureSection />
 
                 {/* Revenue Pipelines Section */}
                 <section className="section bg-dark-alt revenue-pipelines-section">
