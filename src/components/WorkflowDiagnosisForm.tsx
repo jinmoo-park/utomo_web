@@ -176,7 +176,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
             ref={containerRef}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="relative w-full overflow-hidden bg-black/40 rounded-3xl border border-primary/10 p-1 hover:border-primary transition-all duration-300"
+            className="relative w-full overflow-hidden bg-black/40 rounded-3xl border border-primary/10 p-0.5 md:p-1 hover:border-primary transition-all duration-300"
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]" />
 
@@ -199,7 +199,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                 <div className="relative rounded-2xl bg-black/60 backdrop-blur-xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
 
-                    <div className="relative p-4 md:p-10">
+                    <div className="relative p-[10px] md:p-10">
                         <div className="mb-8 text-center">
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }}
@@ -209,7 +209,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                             >
                                 <IconifyIcon icon="solar:buildings-2-linear" width="28px" height="28px" className="text-black" />
                             </motion.div>
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
+                            <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
                                 무료 워크플로우 진단 신청
                             </h2>
                             <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4">

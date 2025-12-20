@@ -50,7 +50,7 @@
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 4rem;
+    padding: 0 2rem;
 }
 
 .logo-link {
@@ -352,6 +352,12 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero-content-overlay {
+        padding: 0 1rem;
+    }
 }
 
 .hero-title {
@@ -921,6 +927,12 @@ section.revenue-pipelines-section>.container {
     display: block;
 }
 
+@media (max-width: 768px) {
+    .pipeline-card-content {
+        padding: 0 1rem;
+    }
+}
+
 .pipeline-card-content.expanded {
     max-height: 10000px;
     opacity: 1;
@@ -938,6 +950,18 @@ section.revenue-pipelines-section>.container {
     transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.3s ease,
         padding 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    .pipeline-card-content.expanded {
+        padding: 0 1rem 1rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .pipeline-card-content.expanded {
+        padding: 0 1rem 1rem 1rem;
+    }
 }
 
 .pipeline-card-number {
@@ -1084,8 +1108,8 @@ section.revenue-pipelines-section>.container {
 /* Mobile Responsive */
 @media (max-width: 1024px) {
     section.revenue-pipelines-section>.container {
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 
     .revenue-pipelines-list {
@@ -1111,7 +1135,7 @@ section.revenue-pipelines-section>.container {
     }
 
     .pipeline-card-header {
-        padding: 1.5rem;
+        padding: 1rem;
         gap: 1rem;
     }
 
@@ -1132,7 +1156,7 @@ section.revenue-pipelines-section>.container {
     }
 
     .pipeline-card-content.expanded {
-        padding: 0 1.5rem 1.5rem 1.5rem;
+        padding: 0 1rem 1rem 1rem;
     }
 
     .pipeline-toggle-btn {
@@ -1477,6 +1501,12 @@ section.revenue-pipelines-section>.container {
     background: #000;
 }
 
+@media (max-width: 768px) {
+    .footer {
+        padding: 6rem 1rem;
+    }
+}
+
 .footer-content {
     display: flex;
     flex-direction: column;
@@ -1545,7 +1575,7 @@ section.revenue-pipelines-section>.container {
 
 @media (max-width: 768px) {
     .header-content {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 
     .nav {
@@ -1611,11 +1641,11 @@ section.revenue-pipelines-section>.container {
     }
 
     .section {
-        padding: 4rem 1.5rem;
+        padding: 3rem 1rem;
     }
 
     .premium-card-inner {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1rem;
     }
 
     .approach-item,
@@ -1703,11 +1733,13 @@ section.revenue-pipelines-section>.container {
     }
 
     .contact-section-premium {
-        padding: 4rem 1rem;
+        padding: 4rem 0;
     }
 
     .contact-form-container {
-        padding: 0 0.5rem;
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
     }
 
     .contact-footer-info {
