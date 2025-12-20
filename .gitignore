@@ -115,3 +115,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Documentation files
+planning_draft.md
+RESEND_DOMAIN_SETUP.md
+approach_section_redesign.md
