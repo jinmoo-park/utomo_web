@@ -199,7 +199,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                 <div className="relative rounded-2xl bg-black/60 backdrop-blur-xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
 
-                    <div className="relative p-6 md:p-10">
+                    <div className="relative p-4 md:p-10">
                         <div className="mb-8 text-center">
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }}

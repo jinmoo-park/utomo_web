@@ -1702,6 +1702,14 @@ section.revenue-pipelines-section>.container {
         font-size: 0.85rem;
     }
 
+    .contact-section-premium {
+        padding: 4rem 1rem;
+    }
+
+    .contact-form-container {
+        padding: 0 0.5rem;
+    }
+
     .contact-footer-info {
         flex-direction: column;
         align-items: center;
