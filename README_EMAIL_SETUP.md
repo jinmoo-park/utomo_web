@@ -5,8 +5,10 @@
 프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
 
 ```
-RESEND_API_KEY=re_jcfBb7Tv_BhUxUvNX3dK5ivbjSuQKHumU
+RESEND_API_KEY=your_resend_api_key_here
 ```
+
+**참고**: API 키는 Resend 대시보드에서 발급받을 수 있습니다.
 
 ## 2. 서버 실행
 

@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, Building2, User, Phone, Mail } from 'lucide-react';
+import { X } from 'lucide-react';
+import { IconifyIcon } from '@/components/IconifyIcon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -206,7 +207,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                                 viewport={{ once: true }}
                                 className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20"
                             >
-                                <Building2 className="w-7 h-7 text-black" />
+                                <IconifyIcon icon="solar:buildings-2-linear" width="28px" height="28px" className="text-black" />
                             </motion.div>
                             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
                                 무료 워크플로우 진단 신청
@@ -220,7 +221,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <Label htmlFor="companyName" className="text-gray-400 text-sm md:text-base font-medium flex items-center gap-2 mb-2">
-                                        <Building2 className="w-4 h-4 text-primary" />
+                                        <IconifyIcon icon="solar:buildings-2-linear" width="16px" height="16px" className="text-primary" />
                                         회사명
                                     </Label>
                                     <Input
@@ -236,7 +237,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
 
                                 <div className="space-y-2">
                                     <Label htmlFor="contactPerson" className="text-gray-400 text-sm md:text-base font-medium flex items-center gap-2 mb-2">
-                                        <User className="w-4 h-4 text-primary" />
+                                        <IconifyIcon icon="solar:user-linear" width="16px" height="16px" className="text-primary" />
                                         담당자명
                                     </Label>
                                     <Input
@@ -254,7 +255,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <Label htmlFor="phoneNumber" className="text-gray-400 text-sm md:text-base font-medium flex items-center gap-2 mb-2">
-                                        <Phone className="w-4 h-4 text-primary" />
+                                        <IconifyIcon icon="solar:phone-calling-linear" width="16px" height="16px" className="text-primary" />
                                         연락처
                                     </Label>
                                     <Input
@@ -271,7 +272,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
 
                                 <div className="space-y-2">
                                     <Label htmlFor="email" className="text-gray-400 text-sm md:text-base font-medium flex items-center gap-2 mb-2">
-                                        <Mail className="w-4 h-4 text-primary" />
+                                        <IconifyIcon icon="solar:letter-linear" width="16px" height="16px" className="text-primary" />
                                         이메일
                                     </Label>
                                     <Input
