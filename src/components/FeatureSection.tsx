@@ -224,8 +224,8 @@ const OutputItem = ({ icon: Icon, label, variants, color }: { icon: any, label: 
 
 // --- Graphic 3: Custom Workflow (Complex Node Tree) ---
 const WorkflowGraphic = () => {
-  // 노드 위치 정의 (그리드 형태)
-  const nodes: Array<{ id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }> = [
+  // 노드 위치 정의 (데스크탑용 - 그리드 형태)
+  const desktopNodes: Array<{ id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }> = [
     // Level 1: Trigger
     { id: 'start', x: 40, y: 160, icon: Globe, label: 'Webhook', type: 'trigger' },
     
@@ -242,8 +242,26 @@ const WorkflowGraphic = () => {
     { id: 'end', x: 380, y: 160, icon: CheckCircle, label: 'Done', type: 'result' },
   ];
 
-  // 연결선 정의 (Start -> End 흐름)
-  const edges = [
+  // 노드 위치 정의 (모바일용 - 더 컴팩트하고 세로로 조정)
+  const mobileNodes: Array<{ id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }> = [
+    // Level 1: Trigger
+    { id: 'start', x: 30, y: 140, icon: Globe, label: 'Webhook', type: 'trigger' },
+    
+    // Level 2: Processing (Branching)
+    { id: 'proc1', x: 100, y: 80, icon: Shield, label: 'Auth', type: 'process' },
+    { id: 'proc2', x: 100, y: 140, icon: GitBranch, label: 'Router', type: 'process' },
+    { id: 'proc3', x: 100, y: 200, icon: FileJson, label: 'Parse', type: 'process' },
+
+    // Level 3: Actions
+    { id: 'act1', x: 170, y: 100, icon: Database, label: 'Save', type: 'action' },
+    { id: 'act2', x: 170, y: 180, icon: Mail, label: 'Email', type: 'action' },
+    
+    // Level 4: Result
+    { id: 'end', x: 240, y: 140, icon: CheckCircle, label: 'Done', type: 'result' },
+  ];
+
+  // 연결선 정의 함수 (노드 배열에 따라 동적으로 생성)
+  const getEdges = (nodeList: typeof desktopNodes) => [
     { from: 'start', to: 'proc1', delay: 0 },
     { from: 'start', to: 'proc2', delay: 0 },
     { from: 'start', to: 'proc3', delay: 0 },
@@ -273,17 +291,18 @@ const WorkflowGraphic = () => {
   });
 
   return (
-    <div className="relative w-full h-[360px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
+    <div className="relative w-full h-[280px] md:h-[360px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
        {/* 배경 그리드 (설계도 느낌) */}
       <div className="absolute inset-0 opacity-[0.05]"
            style={{ backgroundImage: `linear-gradient(${THEME.text} 1px, transparent 1px), linear-gradient(90deg, ${THEME.text} 1px, transparent 1px)`, backgroundSize: '40px 40px' }}>
       </div>
 
-      <div className="relative w-full h-full max-w-[450px]">
+      {/* 데스크탑 뷰 */}
+      <div className="relative w-full h-full max-w-[450px] hidden md:block">
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          {edges.map((edge, i) => {
-            const startNode = nodes.find(n => n.id === edge.from)!;
-            const endNode = nodes.find(n => n.id === edge.to)!;
+          {getEdges(desktopNodes).map((edge, i) => {
+            const startNode = desktopNodes.find(n => n.id === edge.from)!;
+            const endNode = desktopNodes.find(n => n.id === edge.to)!;
             
             // 베지에 곡선 계산
             const pathD = `M ${startNode.x + 20} ${startNode.y + 20} C ${(startNode.x + endNode.x) / 2} ${startNode.y + 20}, ${(startNode.x + endNode.x) / 2} ${endNode.y + 20}, ${endNode.x + 20} ${endNode.y + 20}`;
@@ -310,8 +329,45 @@ const WorkflowGraphic = () => {
         </svg>
 
         {/* 노드 렌더링 */}
-        {nodes.map((node, i) => (
-           <NodeItem key={node.id} node={node} index={i} />
+        {desktopNodes.map((node, i) => (
+           <NodeItem key={node.id} node={node} index={i} isMobile={false} />
+        ))}
+      </div>
+
+      {/* 모바일 뷰 */}
+      <div className="relative w-full h-full max-w-[280px] md:hidden">
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {getEdges(mobileNodes).map((edge, i) => {
+            const startNode = mobileNodes.find(n => n.id === edge.from)!;
+            const endNode = mobileNodes.find(n => n.id === edge.to)!;
+            
+            // 베지에 곡선 계산
+            const pathD = `M ${startNode.x + 20} ${startNode.y + 20} C ${(startNode.x + endNode.x) / 2} ${startNode.y + 20}, ${(startNode.x + endNode.x) / 2} ${endNode.y + 20}, ${endNode.x + 20} ${endNode.y + 20}`;
+
+            return (
+              <React.Fragment key={i}>
+                {/* 배경 라인 (Inactive) */}
+                <path d={pathD} stroke="rgba(255,255,255,0.1)" strokeWidth="1.5" fill="none" />
+                
+                {/* 활성 라인 (Active Animation) */}
+                <motion.path 
+                  d={pathD} 
+                  stroke={THEME.neon} 
+                  strokeWidth="1.5" 
+                  fill="none"
+                  variants={pathVariants(edge.delay)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                />
+              </React.Fragment>
+            );
+          })}
+        </svg>
+
+        {/* 노드 렌더링 */}
+        {mobileNodes.map((node, i) => (
+           <NodeItem key={node.id} node={node} index={i} isMobile={true} />
         ))}
       </div>
     </div>
@@ -319,7 +375,7 @@ const WorkflowGraphic = () => {
 };
 
 // 개별 노드 컴포넌트
-const NodeItem = ({ node, index }: { node: { id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }, index: number }) => {
+const NodeItem = ({ node, index, isMobile }: { node: { id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }, index: number, isMobile: boolean }) => {
   // 노드 등장 타이밍 계산 (열 위치에 따라 순차적)
   const delay = node.type === 'trigger' ? 0 
               : node.type === 'process' ? 0.4
@@ -350,7 +406,7 @@ const NodeItem = ({ node, index }: { node: { id: string, x: number, y: number, i
 
   return (
     <motion.div
-      className={`absolute flex flex-col items-center gap-2 w-[100px] transform -translate-x-1/2 -translate-y-1/2`}
+      className={`absolute flex flex-col items-center gap-1.5 md:gap-2 ${isMobile ? 'w-[70px]' : 'w-[100px]'} transform -translate-x-1/2 -translate-y-1/2`}
       style={{ left: node.x, top: node.y }}
       variants={nodeVariants}
       initial="hidden"
@@ -359,7 +415,7 @@ const NodeItem = ({ node, index }: { node: { id: string, x: number, y: number, i
     >
       {/* 아이콘 박스 */}
       <div className={`
-        relative flex items-center justify-center w-10 h-10 rounded-xl border shadow-lg z-10
+        relative flex items-center justify-center ${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-xl border shadow-lg z-10
         ${isTrigger || isResult 
           ? `bg-[#DFFF00] border-[#DFFF00] text-black` 
           : 'bg-zinc-900 border-zinc-700 text-zinc-400'
@@ -369,12 +425,12 @@ const NodeItem = ({ node, index }: { node: { id: string, x: number, y: number, i
          {(isTrigger || isResult) && (
             <div className="absolute inset-0 bg-[#DFFF00] blur-md opacity-40 rounded-xl animate-pulse" />
          )}
-         <Icon size={18} />
+         <Icon size={isMobile ? 14 : 18} />
       </div>
 
       {/* 라벨 */}
       <div className={`
-        px-2 py-1 rounded text-[10px] font-medium border backdrop-blur-md
+        px-1.5 md:px-2 py-0.5 md:py-1 rounded ${isMobile ? 'text-[9px]' : 'text-[10px]'} font-medium border backdrop-blur-md
         ${isTrigger || isResult 
             ? 'bg-[#DFFF00]/10 border-[#DFFF00]/30 text-[#DFFF00]' 
             : 'bg-black/40 border-white/5 text-zinc-500'
