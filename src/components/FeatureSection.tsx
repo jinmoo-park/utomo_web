@@ -34,6 +34,10 @@ const THEME = {
 const CollaborationGraphic = () => {
   return (
     <div className="relative w-full h-[320px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
+      {/* 배경 그리드 (설계도 느낌) */}
+      <div className="absolute inset-0 opacity-[0.05]"
+           style={{ backgroundImage: `linear-gradient(${THEME.text} 1px, transparent 1px), linear-gradient(90deg, ${THEME.text} 1px, transparent 1px)`, backgroundSize: '40px 40px' }}>
+      </div>
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(223,255,0,0.05),transparent_50%)]" />
       
@@ -104,6 +108,10 @@ const AutomationGraphic = () => {
 
   return (
     <div className="relative w-full min-h-[320px] rounded-2xl bg-zinc-900/50 border border-white/5 overflow-hidden flex flex-col md:flex-row items-center justify-between p-6 md:p-8 gap-6 md:gap-0">
+      {/* 배경 그리드 (설계도 느낌) */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
+           style={{ backgroundImage: `linear-gradient(${THEME.text} 1px, transparent 1px), linear-gradient(90deg, ${THEME.text} 1px, transparent 1px)`, backgroundSize: '40px 40px' }}>
+      </div>
       {/* 배경 회로도 패턴 */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${THEME.text} 1px, transparent 0)`, backgroundSize: '24px 24px' }}>
