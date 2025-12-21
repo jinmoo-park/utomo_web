@@ -8,7 +8,16 @@ import {
   Zap, 
   CheckCircle2,
   Share2,
-  Layers
+  Layers,
+  Cloud,
+  Table,
+  BarChartBig,
+  Globe,
+  Shield,
+  GitBranch,
+  FileJson,
+  Mail,
+  CheckCircle
 } from 'lucide-react';
 
 // --- Color Constants ---
@@ -77,133 +86,297 @@ const CollaborationGraphic = () => {
   );
 };
 
-// --- Graphic 2: Data Automation (Pipeline Flow) ---
+// --- Graphic 2: Data Automation (Enhanced Pipeline Flow) ---
 const AutomationGraphic = () => {
+  // 애니메이션 변수
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+  };
+
   return (
-    <div className="relative w-full h-[320px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
-      {/* Animated Particles Path */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 320">
+    <div className="relative w-full min-h-[320px] rounded-2xl bg-zinc-900/50 border border-white/5 overflow-hidden flex flex-col md:flex-row items-center justify-between p-6 md:p-8 gap-6 md:gap-0">
+      {/* 배경 회로도 패턴 */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${THEME.text} 1px, transparent 0)`, backgroundSize: '24px 24px' }}>
+      </div>
+
+      {/* 파이프라인 연결선 애니메이션 (데스크탑용 가로, 모바일용 세로) */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block" viewBox="0 0 400 320" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="transparent" />
-            <stop offset="50%" stopColor="#DFFF00" />
-            <stop offset="100%" stopColor="transparent" />
+          <linearGradient id="grad-desktop" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={THEME.neon} stopOpacity="0" />
+            <stop offset="50%" stopColor={THEME.neon} stopOpacity="1" />
+            <stop offset="100%" stopColor={THEME.neon} stopOpacity="0" />
           </linearGradient>
         </defs>
-        
-        {/* Stream Lines */}
-        <motion.path 
-          d="M0 160 H 400" 
-          stroke="url(#grad1)" 
-          strokeWidth="1" 
+        <motion.path
+          d="M 80 160 L 320 160"
+          stroke="url(#grad-desktop)"
+          strokeWidth="2"
+          strokeDasharray="6,6"
           fill="none"
-          strokeDasharray="5,5"
-          animate={{ strokeDashoffset: [-100, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          opacity="0.3"
+          animate={{ strokeDashoffset: [-24, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          opacity="0.4"
+        />
+      </svg>
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 md:hidden" viewBox="0 0 320 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="grad-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={THEME.neon} stopOpacity="0" />
+            <stop offset="50%" stopColor={THEME.neon} stopOpacity="1" />
+            <stop offset="100%" stopColor={THEME.neon} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <motion.path
+          d="M 160 80 L 160 320"
+          stroke="url(#grad-mobile)"
+          strokeWidth="2"
+          strokeDasharray="6,6"
+          fill="none"
+          animate={{ strokeDashoffset: [-24, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          opacity="0.4"
         />
       </svg>
 
-      {/* Input Side (Chaos) */}
-      <div className="absolute left-8 flex flex-col gap-4">
-        {[FileText, Database, Share2].map((Icon, i) => (
-          <motion.div
-            key={i}
-            animate={{ x: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-            className="p-2 rounded-lg bg-white/5 border border-white/10"
-          >
-            <Icon size={20} className="text-zinc-500" />
-          </motion.div>
-        ))}
-      </div>
+      {/* Left: Input Sources (Raw Data) */}
+      <motion.div variants={containerVariants} initial="hidden" whileInView="visible" className="relative z-10 flex flex-col gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm w-full md:w-auto">
+        <h4 className="text-xs text-zinc-400 font-medium mb-1 uppercase tracking-wider text-center md:text-left">Raw Inputs</h4>
+        <SourceItem icon={FileText} label="Documents / Emails" variants={itemVariants} />
+        <SourceItem icon={Database} label="Legacy DB / ERP" variants={itemVariants} />
+        <SourceItem icon={Cloud} label="External APIs" variants={itemVariants} />
+      </motion.div>
 
-      {/* Center Processor */}
-      <div className="relative z-10 w-24 h-24 flex items-center justify-center">
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 rounded-full border border-dashed border-[#DFFF00]/30"
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-12 h-12 rounded-full bg-[#DFFF00]/10 border border-[#DFFF00] flex items-center justify-center shadow-[0_0_15px_rgba(223,255,0,0.3)]"
-        >
-          <Zap size={20} className="text-[#DFFF00]" />
-        </motion.div>
-      </div>
-
-      {/* Output Side (Ordered) */}
-      <div className="absolute right-8 flex flex-col gap-2">
-        {[1, 2, 3].map((_, i) => (
+      {/* Center: AI Processor */}
+      <motion.div initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: 0.5, type: "spring" }} className="relative z-20 flex flex-col items-center justify-center shrink-0">
+        <div className="relative w-24 h-24 flex items-center justify-center mb-2">
+          {/* 회전하는 외부 링 */}
           <motion.div
-            key={i}
-            initial={{ x: 20, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.5 + (i * 0.2) }}
-            className="w-32 h-8 rounded bg-white/5 border-l-2 border-[#DFFF00] flex items-center px-3"
-          >
-            <div className="w-2 h-2 rounded-full bg-zinc-500 mr-2" />
-            <div className="w-16 h-1 bg-zinc-700 rounded-full" />
-          </motion.div>
-        ))}
-      </div>
+            animate={{ rotate: 360 }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 rounded-full border-2 border-dashed border-[#DFFF00]/40"
+          />
+          {/* 반대로 회전하는 내부 링 */}
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-2 rounded-full border border-dotted border-[#DFFF00]/20"
+          />
+          {/* 중앙 코어 */}
+          <div className="w-14 h-14 rounded-full bg-[#DFFF00]/10 border border-[#DFFF00] flex items-center justify-center shadow-[0_0_20px_rgba(223,255,0,0.4)] z-10 relative overflow-hidden">
+            <motion.div animate={{ y: [-20, 20] }} transition={{duration: 1.5, repeat: Infinity, ease:"linear", repeatType:"mirror"}} className="absolute inset-0 bg-gradient-to-b from-transparent via-[#DFFF00]/30 to-transparent opacity-50" />
+            <Zap size={24} className="text-[#DFFF00] relative z-20" />
+          </div>
+        </div>
+        <span className="text-xs font-semibold text-[#DFFF00] tracking-wider uppercase">AI Processing Engine</span>
+        <span className="text-[10px] text-zinc-500">Real-time Transformation</span>
+      </motion.div>
+
+      {/* Right: Output Data (Structured) */}
+      <motion.div variants={containerVariants} initial="hidden" whileInView="visible" className="relative z-10 flex flex-col gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm w-full md:w-auto">
+        <h4 className="text-xs text-zinc-400 font-medium mb-1 uppercase tracking-wider text-center md:text-right">Structured Data</h4>
+        <OutputItem icon={Table} label="Cleaned Tables" variants={itemVariants} color="#DFFF00" />
+        <OutputItem icon={BarChartBig} label="Actionable Insights" variants={itemVariants} color="#DFFF00" />
+        <OutputItem icon={CheckCircle2} label="Automated Reports" variants={itemVariants} color="#DFFF00" />
+      </motion.div>
     </div>
   );
 };
 
-// --- Graphic 3: Custom Workflow (Node Graph) ---
+// 보조 컴포넌트 (소스 아이템)
+const SourceItem = ({ icon: Icon, label, variants }: { icon: any, label: string, variants: any }) => (
+  <motion.div variants={variants} className="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5">
+    <div className="p-1.5 rounded bg-zinc-800/80">
+      <Icon size={16} className="text-zinc-400" />
+    </div>
+    <span className="text-sm text-zinc-300">{label}</span>
+  </motion.div>
+);
+
+// 보조 컴포넌트 (결과 아이템)
+const OutputItem = ({ icon: Icon, label, variants, color }: { icon: any, label: string, variants: any, color: string }) => (
+  <motion.div variants={variants} className="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 md:flex-row-reverse md:text-right">
+    <div className="p-1.5 rounded bg-zinc-800/80 relative overflow-hidden">
+      <motion.div initial={{opacity:0}} whileInView={{opacity:1}} transition={{delay:1}} className="absolute inset-0 bg-[#DFFF00]/20 blur-sm" />
+      <Icon size={16} className="text-[#DFFF00] relative z-10" />
+    </div>
+    <span className="text-sm text-white font-medium">{label}</span>
+  </motion.div>
+);
+
+// --- Graphic 3: Custom Workflow (Complex Node Tree) ---
 const WorkflowGraphic = () => {
+  // 노드 위치 정의 (그리드 형태)
+  const nodes: Array<{ id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }> = [
+    // Level 1: Trigger
+    { id: 'start', x: 40, y: 160, icon: Globe, label: 'Webhook', type: 'trigger' },
+    
+    // Level 2: Processing (Branching)
+    { id: 'proc1', x: 160, y: 60, icon: Shield, label: 'Auth Check', type: 'process' },
+    { id: 'proc2', x: 160, y: 160, icon: GitBranch, label: 'Router', type: 'process' },
+    { id: 'proc3', x: 160, y: 260, icon: FileJson, label: 'Parse Data', type: 'process' },
+
+    // Level 3: Actions
+    { id: 'act1', x: 280, y: 80, icon: Database, label: 'Save DB', type: 'action' },
+    { id: 'act2', x: 280, y: 240, icon: Mail, label: 'Send Email', type: 'action' },
+    
+    // Level 4: Result
+    { id: 'end', x: 380, y: 160, icon: CheckCircle, label: 'Done', type: 'result' },
+  ];
+
+  // 연결선 정의 (Start -> End 흐름)
+  const edges = [
+    { from: 'start', to: 'proc1', delay: 0 },
+    { from: 'start', to: 'proc2', delay: 0 },
+    { from: 'start', to: 'proc3', delay: 0 },
+    { from: 'proc1', to: 'act1', delay: 0.5 },
+    { from: 'proc2', to: 'act1', delay: 0.5 },
+    { from: 'proc2', to: 'act2', delay: 0.5 },
+    { from: 'proc3', to: 'act2', delay: 0.5 },
+    { from: 'act1', to: 'end', delay: 1.0 },
+    { from: 'act2', to: 'end', delay: 1.0 },
+  ];
+
+  // 연결선 애니메이션 variants (화면 재진입 시 항상 hidden에서 시작)
+  const pathVariants = (delay: number) => ({
+    hidden: {
+      pathLength: 0,
+      opacity: 0,
+    },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        delay: delay,
+        ease: "easeInOut" as const,
+      },
+    },
+  });
+
   return (
-    <div className="relative w-full h-[320px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
-      <div className="relative w-[300px] h-[200px]">
-        {/* Connection Lines (SVG) */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-          <motion.path 
-            d="M50 50 C 150 50, 150 150, 250 150" 
-            stroke="#333" 
-            strokeWidth="2" 
-            fill="none" 
-          />
-          {/* Active Pulse Line */}
-          <motion.path 
-            d="M50 50 C 150 50, 150 150, 250 150" 
-            stroke="#DFFF00" 
-            strokeWidth="2" 
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 1 }}
-          />
-          
-          <motion.path d="M50 150 C 100 150, 100 100, 150 100" stroke="#333" strokeWidth="2" fill="none" />
+    <div className="relative w-full h-[360px] flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/5">
+       {/* 배경 그리드 (설계도 느낌) */}
+      <div className="absolute inset-0 opacity-[0.05]"
+           style={{ backgroundImage: `linear-gradient(${THEME.text} 1px, transparent 1px), linear-gradient(90deg, ${THEME.text} 1px, transparent 1px)`, backgroundSize: '40px 40px' }}>
+      </div>
+
+      <div className="relative w-full h-full max-w-[450px]">
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {edges.map((edge, i) => {
+            const startNode = nodes.find(n => n.id === edge.from)!;
+            const endNode = nodes.find(n => n.id === edge.to)!;
+            
+            // 베지에 곡선 계산
+            const pathD = `M ${startNode.x + 20} ${startNode.y + 20} C ${(startNode.x + endNode.x) / 2} ${startNode.y + 20}, ${(startNode.x + endNode.x) / 2} ${endNode.y + 20}, ${endNode.x + 20} ${endNode.y + 20}`;
+
+            return (
+              <React.Fragment key={i}>
+                {/* 배경 라인 (Inactive) */}
+                <path d={pathD} stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" />
+                
+                {/* 활성 라인 (Active Animation) */}
+                <motion.path 
+                  d={pathD} 
+                  stroke={THEME.neon} 
+                  strokeWidth="2" 
+                  fill="none"
+                  variants={pathVariants(edge.delay)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                />
+              </React.Fragment>
+            );
+          })}
         </svg>
 
-        {/* Nodes */}
-        <div className="absolute top-[20px] left-[10px] z-10">
-            <NodeLabel icon={Share2} label="Trigger" active />
-        </div>
-        <div className="absolute top-[70px] left-[110px] z-10">
-            <NodeLabel icon={Layers} label="Logic" />
-        </div>
-        <div className="absolute bottom-[20px] right-[10px] z-10">
-            <NodeLabel icon={CheckCircle2} label="Action" active accent />
-        </div>
-         <div className="absolute bottom-[20px] left-[10px] z-10 opacity-50">
-            <NodeLabel icon={FileText} label="Email" />
-        </div>
+        {/* 노드 렌더링 */}
+        {nodes.map((node, i) => (
+           <NodeItem key={node.id} node={node} index={i} />
+        ))}
       </div>
     </div>
   );
 };
 
-const NodeLabel = ({ icon: Icon, label, active, accent }: { icon: any, label: string, active?: boolean, accent?: boolean }) => (
-  <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${active ? 'bg-white/10 border-white/30' : 'bg-black/40 border-white/5'} backdrop-blur-sm`}>
-    <Icon size={14} className={accent ? 'text-[#DFFF00]' : 'text-zinc-400'} />
-    <span className={`text-xs ${accent ? 'text-[#DFFF00]' : 'text-zinc-300'}`}>{label}</span>
-  </div>
-);
+// 개별 노드 컴포넌트
+const NodeItem = ({ node, index }: { node: { id: string, x: number, y: number, icon: any, label: string, type: 'trigger' | 'process' | 'action' | 'result' }, index: number }) => {
+  // 노드 등장 타이밍 계산 (열 위치에 따라 순차적)
+  const delay = node.type === 'trigger' ? 0 
+              : node.type === 'process' ? 0.4
+              : node.type === 'action' ? 0.9
+              : 1.4;
+
+  const isTrigger = node.type === 'trigger';
+  const isResult = node.type === 'result';
+  const Icon = node.icon;
+
+  // 노드 애니메이션 variants (화면 재진입 시 항상 hidden에서 시작)
+  const nodeVariants = {
+    hidden: {
+      scale: 0,
+      opacity: 0,
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: delay,
+        type: "spring" as const,
+        stiffness: 200,
+        damping: 15,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className={`absolute flex flex-col items-center gap-2 w-[100px] transform -translate-x-1/2 -translate-y-1/2`}
+      style={{ left: node.x, top: node.y }}
+      variants={nodeVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false }}
+    >
+      {/* 아이콘 박스 */}
+      <div className={`
+        relative flex items-center justify-center w-10 h-10 rounded-xl border shadow-lg z-10
+        ${isTrigger || isResult 
+          ? `bg-[#DFFF00] border-[#DFFF00] text-black` 
+          : 'bg-zinc-900 border-zinc-700 text-zinc-400'
+        }
+      `}>
+         {/* 활성 노드일 때 빛나는 효과 */}
+         {(isTrigger || isResult) && (
+            <div className="absolute inset-0 bg-[#DFFF00] blur-md opacity-40 rounded-xl animate-pulse" />
+         )}
+         <Icon size={18} />
+      </div>
+
+      {/* 라벨 */}
+      <div className={`
+        px-2 py-1 rounded text-[10px] font-medium border backdrop-blur-md
+        ${isTrigger || isResult 
+            ? 'bg-[#DFFF00]/10 border-[#DFFF00]/30 text-[#DFFF00]' 
+            : 'bg-black/40 border-white/5 text-zinc-500'
+        }
+      `}>
+        {node.label}
+      </div>
+    </motion.div>
+  );
+};
 
 
 // --- Main Reusable Section Component ---
@@ -285,7 +458,7 @@ export default function FeatureSection() {
   ];
 
   return (
-    <section id="solutions" className="w-full bg-[#050505] py-24 px-4 md:px-12 overflow-hidden">
+    <section id="solutions" className="w-full bg-[#050505] py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20 space-y-4">
              <h2 className="text-[#DFFF00] font-semibold tracking-wider uppercase text-sm">Features</h2>
