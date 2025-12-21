@@ -78,7 +78,7 @@ const CollaborationGraphic = () => {
             <span className="text-[10px] text-zinc-500">Just now</span>
           </div>
           <p className="text-sm text-zinc-300 mb-3">
-            고객 문의 요약 보고서가 생성되었습니다.
+            고객 문의 요약 보고서 생성 완료!
           </p>
           <div className="flex items-center gap-2 p-2 rounded bg-white/5 border border-white/5">
             <FileText size={16} className="text-[#DFFF00]" />
@@ -214,8 +214,8 @@ const SourceItem = ({ icon: Icon, label, variants }: { icon: any, label: string,
 // 보조 컴포넌트 (결과 아이템)
 const OutputItem = ({ icon: Icon, label, variants, color }: { icon: any, label: string, variants: any, color: string }) => (
   <motion.div variants={variants} className="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 md:flex-row-reverse md:text-right">
-    <div className="p-1.5 rounded bg-zinc-800/80 relative overflow-hidden">
-      <motion.div initial={{opacity:0}} whileInView={{opacity:1}} transition={{delay:1}} className="absolute inset-0 bg-[#DFFF00]/20 blur-sm" />
+    <div className="p-1.5 rounded bg-zinc-800/80 relative shrink-0">
+      <motion.div initial={{opacity:0}} whileInView={{opacity:1}} transition={{delay:1}} className="absolute -inset-1 bg-[#DFFF00]/5 rounded" style={{ filter: 'blur(3px)' }} />
       <Icon size={16} className="text-[#DFFF00] relative z-10" />
     </div>
     <span className="text-sm text-white font-medium">{label}</span>
