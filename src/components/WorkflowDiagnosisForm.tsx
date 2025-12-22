@@ -229,7 +229,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                                         name="companyName"
                                         value={formData.companyName}
                                         onChange={handleChange}
-                                        placeholder="utomo 주식회사"
+                                        placeholder="주식회사 유토모"
                                         required
                                         className="bg-white/5 border-white/10 text-white text-lg md:text-xl font-semibold h-14 md:h-16 px-4 md:px-6 rounded-2xl placeholder:text-gray-600 focus:border-primary focus:ring-primary/20 transition-all"
                                     />
@@ -245,7 +245,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                                         name="contactPerson"
                                         value={formData.contactPerson}
                                         onChange={handleChange}
-                                        placeholder="홍길동"
+                                        placeholder="김이박"
                                         required
                                         className="bg-white/5 border-white/10 text-white text-lg md:text-xl font-semibold h-14 md:h-16 px-4 md:px-6 rounded-2xl placeholder:text-gray-600 focus:border-primary focus:ring-primary/20 transition-all"
                                     />
