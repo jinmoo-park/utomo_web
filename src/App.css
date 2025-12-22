@@ -8,9 +8,18 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Expressa-DemiBold';
+    src: url('/font/Expressa-DemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .font-croogla {
-    font-family: 'Croogla4F', sans-serif;
+    font-family: 'Expressa-DemiBold', sans-serif;
     text-transform: lowercase;
+    letter-spacing: 0.1rem;
 }
 
 :root {
