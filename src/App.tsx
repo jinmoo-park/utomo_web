@@ -155,10 +155,10 @@ function App() {
                     <div className="container hero-content-overlay">
                         <h1 className="hero-title">
                             가장 강력한 AI는
-                            <span className="accent-text"> 당신이 쓰고 있는지조차 모르는 AI</span>입니다.
+                            <span className="accent-text"> 쓰고 있는지조차 모르는 AI</span>입니다.
                         </h1>
                         <p className="hero-subtitle">
-                            직원들에게 새로운 툴을 가르치지 마세요. <Utomo />는 당신이 이미 사용 중인 Slack, Notion, Excel 속에 AI를 숨겨 업무 효율을 극대화합니다.
+                            직원들에게 새로운 툴을 가르치지 마세요. <Utomo />는 이미 사용 중인 Slack, Notion, Sheet 속에 AI를 숨겨 업무 효율을 극대화합니다.
                         </p>
                         <div className="hero-actions">
                             <a href="#contact" className="btn-primary">
