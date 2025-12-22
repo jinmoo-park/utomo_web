@@ -8,18 +8,9 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Expressa-DemiBold';
-    src: url('/font/Expressa-DemiBold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 .font-croogla {
-    font-family: 'Expressa-DemiBold', sans-serif;
+    font-family: 'Croogla4F', sans-serif;
     text-transform: lowercase;
-    letter-spacing: 0.1rem;
 }
 
 :root {
@@ -382,6 +373,7 @@
         0 0 40px rgba(0, 0, 0, 0.4);
     word-break: keep-all;
     overflow-wrap: break-word;
+    text-wrap: balance;
     animation: fadeInUp 1s ease-out forwards;
 }
 
@@ -415,6 +407,7 @@
     opacity: 0;
     word-break: keep-all;
     overflow-wrap: break-word;
+    text-wrap: balance;
     text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.8),
         0 4px 16px rgba(0, 0, 0, 0.6);
