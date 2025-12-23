@@ -358,8 +358,8 @@ function App() {
                 <section className="section bg-dark-alt revenue-pipelines-section">
                     <div className="container">
                         <div className="text-center reveal">
-                            <h2 className="section-title">이렇게 자동화해볼 수 있어요</h2>
-                            <p className="section-subtitle">잠자는 매출을 깨우는 자동화 모델 사례</p>
+                            <h2 className="section-title">이렇게 자동화해볼 수 있어요.</h2>
+                            <p className="section-subtitle">단순 반복이 아닙니다. 상황을 읽고, 맥락을 파악하고, 사람처럼 움직입니다.</p>
                         </div>
                         
                         <div className="revenue-pipelines-container">

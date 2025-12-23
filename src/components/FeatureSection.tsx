@@ -525,11 +525,7 @@ export default function FeatureSection() {
     <section id="solutions" className="w-full bg-[#050505] py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20 space-y-4">
-             <h2 className="text-[#DFFF00] font-semibold tracking-wider uppercase text-sm">Features</h2>
-             <p className="text-4xl md:text-5xl font-bold text-white">
-                복잡한 업무는 AI에게,<br/>
-                당신은 결정만 하세요.
-             </p>
+             <h2 className="section-title">신경 쓰지 않아도 업무는 빈틈없이 흘러갑니다.</h2>
         </div>
 
         <div className="flex flex-col">
