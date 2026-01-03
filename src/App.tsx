@@ -83,7 +83,7 @@ function App() {
 
     const handleFormSubmit = async (data: any) => {
         try {
-            const response = await fetch('http://localhost:3001/api/send-email', {
+            const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -717,10 +717,6 @@ function App() {
                             <div className="info-item">
                                 <Mail size={20} />
                                 <span>info@utomo.co.kr</span>
-                            </div>
-                            <div className="info-item">
-                                <Phone size={20} />
-                                <span>02-6677-6368</span>
                             </div>
                         </div>
                     </div>
