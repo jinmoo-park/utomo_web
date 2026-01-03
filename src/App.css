@@ -1521,28 +1521,327 @@ section.revenue-pipelines-section>.container {
 .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
+    align-items: flex-start;
+    gap: 1.5rem;
     max-width: 1400px;
     margin: 0 auto;
 }
 
+.footer-top {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
 .footer-logo .logo-svg {
-    height: 1.8em;
+    height: 1.2em;
     color: var(--primary);
 }
 
 .footer-links {
     display: flex;
-    gap: 3rem;
+    align-items: center;
+    gap: 1.5rem;
     color: var(--text-sub);
-    font-size: 1rem;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: var(--text-sub);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
+
+.footer-link-btn {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    transition: var(--transition-base);
+    text-decoration: none;
+}
+
+.footer-link-btn:hover {
+    color: var(--primary);
+}
+
+.business-info-link {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    transition: var(--transition-base);
+}
+
+.business-info-link:hover {
+    color: var(--primary);
 }
 
 .copyright {
     color: var(--text-sub);
-    font-size: 1rem;
+    font-size: 0.85rem;
     opacity: 0.6;
+    margin-top: 0.5rem;
+}
+
+/* Business Info Modal */
+.business-info-wrapper {
+    position: relative;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1999;
+}
+
+.modal-content {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 0.5rem;
+    background: #0a0a0a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    min-width: 280px;
+    max-width: 320px;
+    z-index: 2000;
+    animation: slideDown 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: var(--transition-base);
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+
+.business-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.business-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.business-info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.business-info-label {
+    font-size: 0.75rem;
+    color: var(--text-sub);
+    font-weight: 500;
+}
+
+.business-info-value {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+/* Policy & Terms Modal */
+.policy-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.policy-modal-content {
+    background: #0a0a0a;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.policy-modal-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: var(--transition-base);
+    margin-bottom: 1rem;
+    z-index: 10;
+}
+
+.policy-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
+
+.policy-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    clear: both;
+}
+
+.policy-modal-body {
+    color: var(--text-main);
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.policy-modal-body h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.policy-modal-body h3:first-of-type {
+    margin-top: 0;
+}
+
+.policy-modal-body p {
+    margin-bottom: 1rem;
+    color: var(--text-sub);
+}
+
+.policy-modal-body p:last-child {
+    margin-bottom: 0;
+}
+
+.policy-modal-body strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .footer-logo .logo-svg {
+        height: 1em;
+    }
+
+    .copyright {
+        font-size: 0.8rem;
+    }
+
+    .modal-content {
+        min-width: 260px;
+        max-width: calc(100vw - 2rem);
+        padding: 0.875rem 1rem;
+    }
+
+    .business-info-label {
+        font-size: 0.7rem;
+    }
+
+    .business-info-value {
+        font-size: 0.8rem;
+    }
+
+    .policy-modal-content {
+        padding: 1.5rem;
+        max-width: 100%;
+        max-height: 95vh;
+    }
+
+    .policy-modal-title {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .policy-modal-body {
+        font-size: 0.9rem;
+    }
+
+    .policy-modal-body h3 {
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .policy-modal-close {
+        padding: 0.4rem;
+    }
 }
 
 /* Reveal Animations */

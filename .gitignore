@@ -120,3 +120,6 @@ dist
 planning_draft.md
 RESEND_DOMAIN_SETUP.md
 approach_section_redesign.md
+
+# Policy and Terms files
+*.txt
