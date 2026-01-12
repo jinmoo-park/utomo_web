@@ -322,7 +322,7 @@ export const WorkflowDiagnosisForm: React.FC<WorkflowDiagnosisFormProps> = ({ on
                             </Button>
                         </form>
 
-                        <div className="mt-6 text-center text-xs text-gray-500">
+                        <div className="mt-6 text-center text-sm md:text-base text-gray-400">
                             신청 후 24시간 이내에 전문 컨설턴트가 연락드립니다.
                         </div>
                     </div>
