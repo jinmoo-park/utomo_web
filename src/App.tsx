@@ -135,6 +135,7 @@ function App() {
                     <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
                         <a href="#why" onClick={() => setIsMenuOpen(false)}>Why <Utomo /></a>
                         <a href="#solutions" onClick={() => setIsMenuOpen(false)}>Solutions</a>
+                        <a href="#use-cases" onClick={() => setIsMenuOpen(false)}>Use Cases</a>
                         <a href="#process" onClick={() => setIsMenuOpen(false)}>Process</a>
                         <a href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</a>
                         <a href="#contact" className="nav-cta" onClick={() => setIsMenuOpen(false)}>무료 진단 신청</a>
@@ -358,7 +359,7 @@ function App() {
                 <FeatureSection />
 
                 {/* Revenue Pipelines Section */}
-                <section className="section bg-dark-alt revenue-pipelines-section">
+                <section id="use-cases" className="section bg-dark-alt revenue-pipelines-section">
                     <div className="container">
                         <div className="text-center reveal">
                             <h2 className="section-title">이렇게 자동화해볼 수 있어요.</h2>
@@ -788,7 +789,7 @@ function App() {
                             </div>
                         </div>
                     </div>
-                    <p className="copyright">© 2025 <Utomo />. All rights reserved.</p>
+                    <p className="copyright">© 2026 <Utomo />. All rights reserved.</p>
                 </div>
             </footer>
 
