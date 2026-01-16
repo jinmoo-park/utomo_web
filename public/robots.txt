@@ -21,10 +21,6 @@ Allow: /
 User-agent: Daumoa
 Allow: /
 
-# 네이버 스마트보드
-User-agent: Yeti-Mobile
-Allow: /
-
 # 차단할 경로가 있다면 아래처럼 설정
 # Disallow: /admin/
 # Disallow: /private/
