@@ -151,7 +151,7 @@ function App() {
                 {/* Hero Section */}
                 <section className="hero">
                     <div className="hero-background">
-                        <img src="/bg.png" alt="" className="hero-bg-img" />
+                        <img src="/bg.png" alt="유토모 AI 에이전트 - 슬랙, 노션, 엑셀 업무 자동화로 복잡한 반복 업무를 해결하는 보이지 않는 AI 업무 자동화 빌더" className="hero-bg-img" />
                         <div className="hero-overlay"></div>
                         <div className="hero-glow"></div>
                         <div className="hero-glow-secondary"></div>
